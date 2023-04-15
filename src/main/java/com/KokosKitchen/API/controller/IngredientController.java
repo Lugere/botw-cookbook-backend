@@ -1,5 +1,6 @@
 package com.KokosKitchen.API.controller;
 
+import com.KokosKitchen.API.model.CookingEffect;
 import com.KokosKitchen.API.model.Ingredient;
 import com.KokosKitchen.API.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +45,9 @@ public class IngredientController {
         String label = body.get("label");
         String description = body.get("description");
         int heartsRecovered = Integer.parseInt(body.get("heartsRecovered"));
+        CookingEffect cookingEffect = CookingEffect.valueOf(body.get("cookingEffect"));
 
-        Ingredient newIngredient = new Ingredient(label, description, heartsRecovered);
+        Ingredient newIngredient = new Ingredient(label, description, heartsRecovered, cookingEffect);
         mySqlRepository.save(newIngredient);
 
         return newIngredient;
@@ -57,6 +59,7 @@ public class IngredientController {
         current.setLabel(body.get("label"));
         current.setDescription(body.get("description"));
         current.setHearsRecovered(Integer.parseInt(body.get("heartsRecovered")));
+        current.setCookingEffect(CookingEffect.valueOf(body.get("cookingEffect")));
 
         mySqlRepository.save(current);
 
